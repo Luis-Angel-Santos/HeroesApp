@@ -1,7 +1,12 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { initializeApp } from 'firebase/app';
 import { getDatabase, ref, child, get } from "firebase/database";
+import { doc, setDoc } from 'firebase/firestore';
 import { environment } from 'src/environments/environment';
+import { HeroesService } from '../../services/heroes.service';
+import { getFirestore } from '@angular/fire/firestore';
+import { Heroe } from '../../interfaces/heroes.interface';
 
 @Component({
   selector: 'app-listado',
@@ -9,19 +14,13 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./listado.component.css']
 })
 export class ListadoComponent implements OnInit{
-  app = initializeApp(environment.firebase);
-  dbRef = ref(getDatabase(this.app));
   
+  heroes!: Heroe[];
+
   ngOnInit(): void {
-    get(child(this.dbRef, `heroes`)).then((snapshot) => {
-      if (snapshot.exists()) {
-        console.log(snapshot.val());
-      } else {
-        console.log("No data available");
-      }
-    }).catch((error) => {
-      console.error(error);
-    });
+    this.heroesService.getHeroes()
+      .subscribe(heroes => this.heroes = heroes);
   }
+  constructor(private heroesService: HeroesService){}
 
 }

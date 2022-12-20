@@ -8,7 +8,8 @@ import { ErrorPageComponent } from './shared/error-page/error-page.component';
 
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from 'src/environments/environment';
-import { getDatabase, provideDatabase } from '@angular/fire/database';
+import { HttpClientModule } from '@angular/common/http';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -19,8 +20,9 @@ import { getDatabase, provideDatabase } from '@angular/fire/database';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    HttpClientModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideDatabase(() => getDatabase()),
+    provideFirestore(() => getFirestore()),
   ],
   providers: [],
   bootstrap: [AppComponent]
