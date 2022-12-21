@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { collectionData, Firestore, collection, where, onSnapshot, doc, getDoc } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { Heroe } from '../interfaces/heroes.interface';
-import { query } from '@firebase/firestore';
-import { HttpClientModule, HttpClient } from '@angular/common/http';
-import { get } from 'firebase/database';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +40,15 @@ export class HeroesService {
     return datosHeroe;
   }
 
+  agregarHeroe(heroe: Heroe){
+    return setDoc(doc(this.firestore, "heroes", heroe.superhero), {
+      id: heroe.superhero,
+      superhero: heroe.superhero,
+      alter_ego: heroe.alter_ego,
+      characters: heroe.characters,
+      first_appearance: heroe.first_appearance,
+      publisher: heroe.publisher
+    });
+  }
 
 }
