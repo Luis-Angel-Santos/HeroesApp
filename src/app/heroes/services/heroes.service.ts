@@ -35,7 +35,7 @@ export class HeroesService {
         }
         return datosHeroe;
       }else{
-        console.log("No such document!");
+        window.alert('No existe');
         return;
       }
     });
