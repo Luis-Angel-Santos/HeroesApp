@@ -9,7 +9,9 @@ import { HeroesService } from '../../services/heroes.service';
   styleUrls: ['./agregar.component.css']
 })
 export class AgregarComponent implements OnInit{
-  
+
+  idExists: string = 'Agregar Héroe';
+  idHeroe: string = '';
   publishers = [
     {
       id: 'DC Comics',
@@ -34,11 +36,24 @@ export class AgregarComponent implements OnInit{
     if(this.heroe.superhero.trim().length === 0){
       return;
     }
-    this.heroesService.agregarHeroe(this.heroe);
+    if(this.heroe.id){
+      this.heroesService.editarHeroe(this.heroe);
+    }else{
+      this.heroesService.agregarHeroe(this.heroe);
+    }
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void { 
+    this.activatedRoute.params
+      .subscribe(({id}) => this.idHeroe = id!);
+    this.heroesService.getHeroePorId(this.idHeroe)
+      .then((heroe) => {
+        this.heroe = heroe!;
+        this.idExists = 'Editar Héroe';
+      })
+  }
 
-  constructor(private heroesService: HeroesService){}
+  constructor(private heroesService: HeroesService,
+              private activatedRoute: ActivatedRoute){}
 
 }

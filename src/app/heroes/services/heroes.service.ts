@@ -1,8 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { collectionData, Firestore, collection, doc, getDoc, setDoc } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc, getDoc, setDoc, updateDoc, addDoc } from '@angular/fire/firestore';
 import { Heroe } from '../interfaces/heroes.interface';
 import { HttpClient } from '@angular/common/http';
+import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +14,7 @@ export class HeroesService {
   placeRef = collection(this.firestore, 'heroes'); 
 
   constructor(private firestore: Firestore,
-              private http: HttpClient) { }
+              private router: Router) { }
 
   getHeroes(): Observable<Heroe[]>{
     return collectionData(this.placeRef, {idField: 'id'}) as Observable<Heroe[]>
@@ -33,22 +35,59 @@ export class HeroesService {
         }
         return datosHeroe;
       }else{
-        window.alert('No existe');
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'No existe!',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        })
         return;
       }
     });
     return datosHeroe;
   }
 
-  agregarHeroe(heroe: Heroe){
-    return setDoc(doc(this.firestore, "heroes", heroe.superhero), {
-      id: heroe.superhero,
+  async agregarHeroe(heroe: Heroe){
+    const addHeroe = await addDoc(collection(this.firestore, 'heroes'), {
       superhero: heroe.superhero,
       alter_ego: heroe.alter_ego,
       characters: heroe.characters,
       first_appearance: heroe.first_appearance,
       publisher: heroe.publisher
     });
+    return updateDoc(doc(this.firestore, 'heroes', addHeroe.id),{
+      id: addHeroe.id
+    }).then(() => {
+      Swal.fire({
+        icon: 'success',
+        title: 'Heroe Agregado',
+        text: 'Heroe Agregado Correctamente',
+        timer: 3000,
+        timerProgressBar: true,
+        showConfirmButton: false
+      }).then(() => this.router.navigate(['/heroes/listado']))
+    });
+  }
+
+  editarHeroe(heroe: Heroe){
+  return updateDoc(doc(this.firestore, 'heroes', `${heroe.id}`), {
+    superhero: heroe.superhero,
+    alter_ego: heroe.alter_ego,
+    characters: heroe.characters,
+    first_appearance: heroe.first_appearance,
+    publisher: heroe.publisher
+  }).then(() => {
+    Swal.fire({
+      icon: 'success',
+      title: 'Datos Modificados',
+      text: 'Información actualizada',
+      timer: 3000,
+      timerProgressBar: true,
+      showConfirmButton: false
+    }).then((resp) => this.router.navigate(['/heroes/editar', heroe.id]))
+  })
   }
 
 }

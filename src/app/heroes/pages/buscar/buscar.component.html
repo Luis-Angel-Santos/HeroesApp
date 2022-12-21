@@ -3,7 +3,7 @@
         <h1>Buscar Héroe</h1>
         <mat-divider></mat-divider>
     </div>
-    <div fxLayout="column">
+    <div fxLayout="column" class="animate__animated animate__fadeIn">
         <mat-form-field class="example-full-width" appearance="fill">
             <input type="text"
                    placeholder="Buscar héroe"
@@ -22,7 +22,7 @@
             </mat-autocomplete>
         </mat-form-field>
     </div>
-    <div *ngIf="heroeSeleccionado" class="tarjeta">
+    <div *ngIf="heroeSeleccionado" class="tarjeta animate__animated animate__fadeIn">
         <app-heroe-tarjeta [heroe]="heroeSeleccionado"></app-heroe-tarjeta>
     </div>
 </div>
