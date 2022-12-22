@@ -19,17 +19,7 @@ export class AuthGuard implements  CanLoad, CanActivate {
         .pipe(
           tap(autenticado => {
             if(!autenticado){
-              this.router.navigate(['./auth/login'])
-                .then(resp => {
-                  Swal.fire({
-                    icon: 'error',
-                    title: 'No tiene acceso',
-                    text: 'Por favor inicie sesión',
-                    timer: 3000,
-                    timerProgressBar: true,
-                    showConfirmButton: false
-                  });
-                });
+              this.router.navigate(['/404']);
             }
           })
         );
@@ -42,17 +32,7 @@ export class AuthGuard implements  CanLoad, CanActivate {
       .pipe(
         tap(autenticado => {
           if(!autenticado){
-            this.router.navigate(['./auth/login'])
-            .then(resp => {
-              Swal.fire({
-                icon: 'error',
-                title: 'No tiene acceso',
-                text: 'Por favor inicie sesión',
-                timer: 3000,
-                timerProgressBar: true,
-                showConfirmButton: false
-              });
-            });
+            this.router.navigate(['/404']);
           }
         })
       );

@@ -26,7 +26,7 @@ export class RegisterComponent {
         timer: 3000,
         timerProgressBar: true,
         showConfirmButton: false
-      })
+      });
     }
   }
 }
