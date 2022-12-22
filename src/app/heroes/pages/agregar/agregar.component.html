@@ -26,10 +26,13 @@
                 <mat-option *ngFor="let publisher of publishers" [value]="publisher.id">{{publisher.desc}}</mat-option>
             </mat-select>
         </mat-form-field>
-        <mat-form-field>
-            <mat-label>Imagen</mat-label>
-            <input matInput type="url" [(ngModel)]="heroe.alt_img" required>
-        </mat-form-field>
+        <div class="custom-input-file col-md-6 col-sm-6 col-xs-6">
+            <input type="file" id="fichero-tarifas" class="input-file" (change)="onFileSelect($event)">
+            Imagen del Héroe <small>(opcional)</small>
+            </div>
+            <mat-progress-bar *ngIf="subirFoto" [value]="progreso" mode="determinate"></mat-progress-bar>
+            <br><br>
+            <p *ngIf="subirFoto">Subida: {{progreso | number}}%</p>
         <br>
         <button (click)="guardar()" mat-raised-button color="primary">
             <mat-icon>edit</mat-icon>

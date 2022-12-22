@@ -55,7 +55,8 @@ export class HeroesService {
       alter_ego: heroe.alter_ego,
       characters: heroe.characters,
       first_appearance: heroe.first_appearance,
-      publisher: heroe.publisher
+      publisher: heroe.publisher,
+      alt_img: heroe.alt_img
     });
     return updateDoc(doc(this.firestore, 'heroes', addHeroe.id),{
       id: addHeroe.id
@@ -72,22 +73,42 @@ export class HeroesService {
   }
 
   editarHeroe(heroe: Heroe){
-  return updateDoc(doc(this.firestore, 'heroes', `${heroe.id}`), {
-    superhero: heroe.superhero,
-    alter_ego: heroe.alter_ego,
-    characters: heroe.characters,
-    first_appearance: heroe.first_appearance,
-    publisher: heroe.publisher
-  }).then(() => {
-    Swal.fire({
-      icon: 'success',
-      title: 'Datos Modificados',
-      text: 'Información actualizada',
-      timer: 3000,
-      timerProgressBar: true,
-      showConfirmButton: false
-    }).then((resp) => this.router.navigate(['/heroes/editar', heroe.id]))
-  })
+    if(heroe.alt_img){
+      return updateDoc(doc(this.firestore, 'heroes', `${heroe.id}`), {
+        superhero: heroe.superhero,
+        alter_ego: heroe.alter_ego,
+        characters: heroe.characters,
+        first_appearance: heroe.first_appearance,
+        publisher: heroe.publisher,
+        alt_img: heroe.alt_img
+      }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Datos Modificados',
+          text: 'Información actualizada',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        }).then((resp) => this.router.navigate(['/heroes/editar', heroe.id]))
+      });
+    }else{
+      return updateDoc(doc(this.firestore, 'heroes', `${heroe.id}`), {
+        superhero: heroe.superhero,
+        alter_ego: heroe.alter_ego,
+        characters: heroe.characters,
+        first_appearance: heroe.first_appearance,
+        publisher: heroe.publisher
+      }).then(() => {
+        Swal.fire({
+          icon: 'success',
+          title: 'Datos Modificados',
+          text: 'Información actualizada',
+          timer: 3000,
+          timerProgressBar: true,
+          showConfirmButton: false
+        }).then((resp) => this.router.navigate(['/heroes/editar', heroe.id]))
+      });
+    }
   }
 
 }
