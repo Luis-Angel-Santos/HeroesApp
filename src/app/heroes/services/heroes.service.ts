@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { collectionData, Firestore, collection, doc, getDoc, setDoc, updateDoc, addDoc } from '@angular/fire/firestore';
+import { collectionData, Firestore, collection, doc, getDoc, setDoc, updateDoc, addDoc, deleteDoc } from '@angular/fire/firestore';
 import { Heroe } from '../interfaces/heroes.interface';
 import { HttpClient } from '@angular/common/http';
 import Swal from 'sweetalert2';
@@ -109,6 +109,42 @@ export class HeroesService {
         }).then((resp) => this.router.navigate(['/heroes/editar', heroe.id]))
       });
     }
+  }
+
+  async eliminarHeroe(id: string){
+    Swal.fire({
+      icon: 'warning',
+      title: 'Eliminar Héroe',
+      text: '¿Esta seguro? Esta Acción no se puede revertir',
+      showConfirmButton: true,
+      showCancelButton: true,
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar',
+      confirmButtonColor: 'red',
+      cancelButtonColor: 'yellow'
+    }).then(async (resp) => {
+      if(resp.isConfirmed){
+        await deleteDoc(doc(this.firestore, 'heroes', id))
+          .then(() => {
+            Swal.fire({
+              icon: 'success',
+              title: 'Héroe Eliminado',
+              text: 'Héroe eliminado de forma correcta',
+              showConfirmButton: true,
+              confirmButtonColor: 'green',
+              confirmButtonText: 'Página Principal'
+            }).then(() => this.router.navigate(['/heroes']));
+          });
+      }
+    }).catch(error => {
+      Swal.fire({
+        icon: 'error',
+        title: 'Opps, hubo un problema',
+        text: error.message,
+        showConfirmButton: true,
+        confirmButtonText: 'Reintentar'
+      })
+    }) 
   }
 
 }

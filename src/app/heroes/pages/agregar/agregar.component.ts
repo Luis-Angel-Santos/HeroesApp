@@ -82,6 +82,10 @@ export class AgregarComponent implements OnInit{
     }
   }
 
+  borrarHeroe(){
+    this.heroesService.eliminarHeroe(this.heroe.id!);
+  }
+
   ngOnInit(): void { 
 
     if(!this.router.url.includes('editar')){

@@ -34,10 +34,17 @@
             <br><br>
             <p *ngIf="subirFoto">Subida: {{progreso | number}}%</p>
         <br>
-        <button (click)="guardar()" mat-raised-button color="primary">
-            <mat-icon>edit</mat-icon>
-            Guardar
-        </button>
+        <div fxLayout>
+            <button (click)="guardar()" mat-raised-button color="primary">
+                <mat-icon>edit</mat-icon>
+                Guardar
+            </button>
+            <span class="spacer"></span>
+            <button mat-raised-button color="warn" *ngIf="heroe.id" (click)="borrarHeroe()">
+                <mat-icon>delete</mat-icon>
+                Borrar
+            </button>
+        </div>
     </div>
     <div fxFlex="50">
         <img [src]="heroe | imagen">
