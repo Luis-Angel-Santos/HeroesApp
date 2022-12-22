@@ -1,5 +1,8 @@
-<h1>{{idExists}} - <small>{{heroe.superhero}}</small></h1>
-
+<div fxLayout>
+    <h1>{{idExists}} - <small>{{heroe.superhero}}</small></h1>
+    <span class="spacer"></span>
+    <button mat-raised-button color="accent" (click)="regresar()"><mat-icon>undo</mat-icon>Regresar</button>
+</div>
 <div fxLayout="row" fxLayoutGap="40px" fxLayout.xs="column" class="animate__animated animate__fadeIn">
     <div fxFlex="50" fxLayout="column">
         <div fxLayout="row" fxLayoutGap="20px" fxLayout.xs="column">
@@ -37,7 +40,7 @@
         <div fxLayout>
             <button (click)="guardar()" mat-raised-button color="primary">
                 <mat-icon>edit</mat-icon>
-                Guardar
+                {{ (heroe.id)? 'Actualizar' : 'Crear Héroe'}}
             </button>
             <span class="spacer"></span>
             <button mat-raised-button color="warn" *ngIf="heroe.id" (click)="borrarHeroe()">
