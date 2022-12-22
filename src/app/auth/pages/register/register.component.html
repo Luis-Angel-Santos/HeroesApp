@@ -1,1 +1,17 @@
-<p>register works!</p>
+<mat-card>
+    <mat-card-title class="header-text">Crea una cuenta nueva</mat-card-title>
+    <mat-card-subtitle class="header-text">Introduce los datos solicitados</mat-card-subtitle>
+    <br><br>
+    <mat-form-field class="example-full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" [(ngModel)]="email" required placeholder="Introduce tu correo">
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+        <mat-label>Nombre de Usuario</mat-label>
+        <input matInput type="text" [(ngModel)]="usuario" required placeholder="Introduce nombre de usuario">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="crearUsuario()">
+        Crear Cuenta
+    </button>
+    <br>
+</mat-card>

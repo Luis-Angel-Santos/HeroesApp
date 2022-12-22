@@ -1,9 +1,13 @@
-<div>
-    <mat-grid-list cols="1">
-        <mat-grid-tile>
-            <button mat-raised-button color="primary" (click)="login()">
-                Ingresar
-            </button>
-        </mat-grid-tile>
-    </mat-grid-list>
-</div>
+<mat-card>
+    <mat-card-title class="header-text">Iniciar Sesión</mat-card-title>
+    <mat-card-subtitle class="header-text">Por favor introduce tu correo registrado</mat-card-subtitle>
+    <br><br>
+    <mat-form-field class="example-full-width">
+            <mat-label>Correo</mat-label>
+            <input matInput type="email" [(ngModel)]="usuario.email" required placeholder="Introduce tu correo">
+    </mat-form-field>
+    <button mat-raised-button color="primary" (click)="login()" [disabled]="usuario.email.length < 1">
+        Ingresar
+    </button>
+    <br>
+</mat-card>

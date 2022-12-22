@@ -13,13 +13,13 @@ export class LoginComponent {
   constructor(private router: Router,
               private authService: AuthService){}
 
+  usuario: User = {
+    id: '',
+    email: '',
+    usuario: '',
+  }
+  
   login(){
-    this.authService.login()
-      .then(user =>{
-        if(user!.id){
-          this.router.navigate(['./heroes'])
-        }
-      })
-
+    this.authService.login(this.usuario.email);
   }
 }
