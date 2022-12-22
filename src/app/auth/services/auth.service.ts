@@ -9,7 +9,13 @@ import { User } from '../interfaces/auth.interface';
 })
 export class AuthService {
 
+  private _auth: User | undefined;
+
   constructor(private firestore: Firestore) { }
+
+  get auth(): User{
+    return { ...this._auth! }
+  }
 
   async login(){
     var datosUser = await getDoc(doc(this.firestore, 'usuarios', '1'))
@@ -33,6 +39,7 @@ export class AuthService {
           return;
         }
       });
+    this._auth = datosUser;
     return datosUser;
   }
   
