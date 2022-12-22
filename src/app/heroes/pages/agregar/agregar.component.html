@@ -30,8 +30,8 @@
             <input type="file" id="fichero-tarifas" class="input-file" (change)="onFileSelect($event)">
             Imagen del Héroe <small>(opcional)</small>
             </div>
+            <br>
             <mat-progress-bar *ngIf="subirFoto" [value]="progreso" mode="determinate"></mat-progress-bar>
-            <br><br>
             <p *ngIf="subirFoto">Subida: {{progreso | number}}%</p>
         <br>
         <div fxLayout>

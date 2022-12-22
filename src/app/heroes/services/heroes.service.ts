@@ -64,7 +64,7 @@ export class HeroesService {
       Swal.fire({
         icon: 'success',
         title: 'Heroe Agregado',
-        text: 'Heroe Agregado Correctamente',
+        text: `Se ha agregado el héroe ${heroe.superhero} correctamente`,
         timer: 3000,
         timerProgressBar: true,
         showConfirmButton: false
@@ -85,7 +85,7 @@ export class HeroesService {
         Swal.fire({
           icon: 'success',
           title: 'Datos Modificados',
-          text: 'Información actualizada',
+          text: `Se ha modificado el héroe ${heroe.superhero}`,
           timer: 3000,
           timerProgressBar: true,
           showConfirmButton: false
@@ -102,7 +102,7 @@ export class HeroesService {
         Swal.fire({
           icon: 'success',
           title: 'Datos Modificados',
-          text: 'Información actualizada',
+          text: `Se ha modificado el héroe ${heroe.superhero}`,
           timer: 3000,
           timerProgressBar: true,
           showConfirmButton: false
