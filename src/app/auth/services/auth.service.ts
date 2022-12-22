@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { collection, collectionData, doc, Firestore, getDoc} from '@angular/fire/firestore';
-import { Observable } from 'rxjs';
+import { doc, Firestore, getDoc} from '@angular/fire/firestore';
+import { Observable, of } from 'rxjs';
 import Swal from 'sweetalert2';
 import { User } from '../interfaces/auth.interface';
 
@@ -26,6 +26,7 @@ export class AuthService {
             email: user.data()['email'],
             usuario: user.data()['usuario']
           }
+          localStorage.setItem('user', datosUser.email);
           return datosUser;
         }else{
           Swal.fire({
@@ -43,4 +44,30 @@ export class AuthService {
     return datosUser;
   }
   
+  logout(){
+    this._auth = undefined;
+    localStorage.removeItem('user');
+  }
+
+  verificarSesion():Observable<boolean>{
+    if( !localStorage.getItem('user') ){
+      return of(false);
+    }
+    getDoc(doc(this.firestore, 'usuarios', '1'))
+      .then(user => {
+        if(user.exists()){
+          const datosUser: User = {
+            id: user.data()['id'],
+            email: user.data()['email'],
+            usuario: user.data()['usuario']
+          }
+          this._auth = datosUser;
+          return datosUser;
+        }else{
+          return;
+        }
+      });
+    return of(true);
+  }
+
 }
