@@ -8,16 +8,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { FormsModule } from '@angular/forms';
 
 @NgModule({
-  declarations: [
-    LoginComponent,
-    RegisterComponent,
-    HomeComponent,
-  ],
-  imports: [
-    CommonModule,
-    AuthRoutingModule,
-    MaterialModule,
-    FormsModule,
-  ]
+    declarations: [
+        LoginComponent,
+        RegisterComponent,
+        HomeComponent,
+    ],
+    imports: [
+        CommonModule,
+        AuthRoutingModule,
+        MaterialModule,
+        FormsModule,
+    ]
 })
 export class AuthModule { }

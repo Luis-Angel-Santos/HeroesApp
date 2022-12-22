@@ -3,6 +3,7 @@
         <mat-toolbar>
             <span>Menú</span>
             <span class="spacer"></span>
+            <img src="../../../../assets/logo.png">
             <button mat-icon-button (click)="sidenav.toggle()">
                 <mat-icon>menu</mat-icon>
             </button>
@@ -24,8 +25,10 @@
         </button>
         <span class="spacer"></span>
         <h2>Héroes App</h2>
+        <img src="../../../../assets/logo.png">
     </mat-toolbar>
     <div class="container">
         <router-outlet></router-outlet>
     </div>
+    <app-footer></app-footer>
 </mat-sidenav-container>

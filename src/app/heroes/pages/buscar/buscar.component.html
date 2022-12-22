@@ -25,4 +25,8 @@
     <div *ngIf="heroeSeleccionado" class="tarjeta animate__animated animate__fadeIn">
         <app-heroe-tarjeta [heroe]="heroeSeleccionado"></app-heroe-tarjeta>
     </div>
+    <div *ngIf="!heroeSeleccionado" class="spinner animate__animated animate__fadeIn">
+        <p>Busque un héroe para poder verlo aquí</p>
+        <mat-spinner></mat-spinner>
+    </div>
 </div>

@@ -8,3 +8,8 @@ mat-card{
 .header-text{
     margin: auto;
 }
+
+img{
+    max-width: 100px;
+    margin: auto;
+}
